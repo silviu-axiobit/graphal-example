@@ -1,5 +1,13 @@
 type Query {
   products: [Product]
+  productsByPrice(min: Float!, max: Float!): [Product]
+  product(id: ID!): Product
+}
+
+type Mutation {
+  addNewProduct(id: ID!, description: String!, price: Float!): Product
+
+  addNewProductReview(id: ID!, rating: Int!, comment: String): Review
 }
 
 type Product {
@@ -13,44 +21,3 @@ type Review {
   rating: Int!
   comment: String
 }
-
-# const schema = new GraphQLSchema({
-#   query: new GraphQLObjectType({
-#     name: "Query",
-#     fields: {
-#       products: {
-#         type: new GraphQLList(Product),
-#       }
-#     },
-#   }),
-# });
-
-# const Review = new GraphQLObjectType({
-#   name: "Review",
-#   fields: {
-#     rating: {
-#       type: new GraphQLNonNull(GraphQLInt),
-#     },
-#     comment: {
-#       type: GraphQLString,
-#     },
-#   },
-# });
-
-# const Product = new GraphQLObjectType({
-#   name: "Product",
-#   fields: {
-#     id: {
-#       type: new GraphQLNonNull(GraphQLID),
-#     },
-#     description: {
-#       type: new GraphQLNonNull(GraphQLString),
-#     },
-#     price: {
-#       type: new GraphQLNonNull(GraphQLFloat),
-#     },
-#     reviews: {
-#       type: new GraphQLList(Review),
-#     },
-#   },
-# });
